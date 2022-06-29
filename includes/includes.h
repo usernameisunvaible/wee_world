@@ -37,11 +37,17 @@
 #include "proto.h"
 
 
+
     #define KEY_CODE elements->event.key.code
     #define PI 3.1415
 
-    #define RECT_SIZE 50
+    #define RECT_SIZE 75
 
+    #define NORD_OUEST ((dcos(25) * id.x - dcos(25) * id.y) * (elements->win_size.x/RECT_SIZE) + elements->win_size.x/2) , ((dsin(25) * id.y + dsin(25) * id.x - str_map[id.y * size.x + id.x]) * (elements->win_size.x/RECT_SIZE) - mid) 
 
+    #define SUD_OUEST ((dcos(25) * id.x - dcos(25) * (id.y + 1)) * (elements->win_size.x/RECT_SIZE) + elements->win_size.x/2) , ((dsin(25) * (id.y + 1) + dsin(25) * id.x - str_map[id.y * size.x + id.x]) * (elements->win_size.x/RECT_SIZE) - mid)
 
+    #define SUD_EST ((dcos(25) * (id.x + 1) - dcos(25) * (id.y + 1)) * (elements->win_size.x/RECT_SIZE)+ elements->win_size.x/2) , ((dsin(25) * (id.y + 1) + dsin(25) * (id.x + 1) - str_map[id.y * size.x + id.x])  * (elements->win_size.x/RECT_SIZE) - mid) 
+
+    #define NORD_EST ((dcos(25) * (id.x + 1) - dcos(25) * id.y ) * (elements->win_size.x/RECT_SIZE) + elements->win_size.x/2) , ((dsin(25) * id.y  + dsin(25) * (id.x + 1) - str_map[id.y * size.x + id.x]) * (elements->win_size.x/RECT_SIZE) - mid)
 #endif //INCLUDES_H

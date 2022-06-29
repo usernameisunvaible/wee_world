@@ -12,20 +12,6 @@ elements_t *load_assets(sfVector2i screen)
 
 int main (int ac, char **av)
 {
-    sfRenderStates *tmp = malloc(sizeof(sfRenderStates));
-    sfIntRect rect = define_rect(0, 0, 512, 512);
-    sfVertexArray *va = sfVertexArray_create();
-    sfVertexArray_setPrimitiveType(va, sfQuads);
-    // sfVertexArray_append(va, define_vertex(define_vectorf(0, 0), sfGreen, define_vectorf(0, 0)));
-    // sfVertexArray_append(va, define_vertex(define_vectorf(512, 0), sfGreen, define_vectorf(0, 512)));
-    // sfVertexArray_append(va, define_vertex(define_vectorf(512, 512), sfGreen, define_vectorf(512, 512)));
-    // sfVertexArray_append(va, define_vertex(define_vectorf(0, 512), sfGreen, define_vectorf(512, 0)));
-    // tmp->texture = malloc(sizeof(sfTexture));
-    tmp->texture = sfTexture_createFromFile("assets/grass.png", &rect);
-    tmp->blendMode = sfBlendNone;
-    tmp->shader = NULL;
-    tmp->transform = sfTransform_fromMatrix(1,0,0,0,1,0,0,0,1);
-
     elements_t *elements = load_assets(define_vectori(1920, 1080));
     char map[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -63,9 +49,9 @@ int main (int ac, char **av)
                   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                  0,0,0,0,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                  0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                  0,0,0,0,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                  0,0,0,0,0,0,3,3,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                  0,0,0,0,0,0,0,5,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                  0,0,0,0,0,0,3,3,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -93,20 +79,14 @@ int main (int ac, char **av)
                   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
     map_ *s_map = load_map(map, define_vectori(64, 64), elements);
-    framebuffer_t *fbr = init_framebuffer(define_vectori(elements->win_size.x, elements->win_size.y));
-    printf("%f\n", pythagore(64, 64));
+    texture_ **textures = init_mapstates();
+    
+    
     while (sfRenderWindow_isOpen(elements->window)) {
         key_events(elements);
-        draw_rect(fbr, define_rect(0, 0, fbr->fbuf_size.x, fbr->fbuf_size.y), sfBlack);
-        // for (int i = 0; i < 16; ++i) {
-        //     for (int j = 0; j < 18; ++j) {
-        //         put_pixel(fbr, (dcos(0) * i - dcos(0) * j) * 20 + 500, (dsin(45) * j + dsin(45) * i - map[j * 16 + i]) *20 + 500, sfBlue);
-        //     }
-        // }
-        // refresh_framebuffer(fbr, elements);
-        // printf("%d %d\n", s_map->size.x, s_map->size.y);
-        refresh_map(elements, s_map, tmp);
-        // sfRenderWindow_drawVertexArray(elements->window, va, tmp);
+        
+        refresh_map(elements, s_map, textures);
+        
         refresh_elements(elements);
     }
     

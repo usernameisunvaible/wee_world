@@ -8,10 +8,10 @@ typedef struct {
     sfVector2f pos_on_screen;
     sfVector2i pos_on_tab;
     sfVertexArray *top;
-    sfVertexArray *north;
-    sfVertexArray *south;
-    sfVertexArray *east;
-    sfVertexArray *west;
+    sfVertexArray **south;
+    sfVertexArray **east;
+    int height;
+    int type;
 }cube_;
 
 typedef struct {
@@ -19,5 +19,11 @@ typedef struct {
     int angle;
     sfVector2i size;
 }map_;
+
+typedef struct {
+    sfRenderStates *state;
+    int type;
+    sfColor bgcolor;
+}texture_;
 
 #endif //MAP_H

@@ -35,6 +35,7 @@ SRC	=	engine/sprite.c	\
 		sources/ope.c	\
 		sources/load_map.c	\
 		sources/map.c	\
+		sources/init_map_textures.c	\
 		
 
 
