@@ -12,6 +12,20 @@ elements_t *load_assets(sfVector2i screen)
 
 int main (int ac, char **av)
 {
+    sfRenderStates *tmp = malloc(sizeof(sfRenderStates));
+    sfIntRect rect = define_rect(0, 0, 512, 512);
+    sfVertexArray *va = sfVertexArray_create();
+    sfVertexArray_setPrimitiveType(va, sfQuads);
+    // sfVertexArray_append(va, define_vertex(define_vectorf(0, 0), sfGreen, define_vectorf(0, 0)));
+    // sfVertexArray_append(va, define_vertex(define_vectorf(512, 0), sfGreen, define_vectorf(0, 512)));
+    // sfVertexArray_append(va, define_vertex(define_vectorf(512, 512), sfGreen, define_vectorf(512, 512)));
+    // sfVertexArray_append(va, define_vertex(define_vectorf(0, 512), sfGreen, define_vectorf(512, 0)));
+    // tmp->texture = malloc(sizeof(sfTexture));
+    tmp->texture = sfTexture_createFromFile("assets/grass.png", &rect);
+    tmp->blendMode = sfBlendNone;
+    tmp->shader = NULL;
+    tmp->transform = sfTransform_fromMatrix(1,0,0,0,1,0,0,0,1);
+
     elements_t *elements = load_assets(define_vectori(1920, 1080));
     char map[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -91,7 +105,8 @@ int main (int ac, char **av)
         // }
         // refresh_framebuffer(fbr, elements);
         // printf("%d %d\n", s_map->size.x, s_map->size.y);
-        refresh_map(elements, s_map);
+        refresh_map(elements, s_map, tmp);
+        // sfRenderWindow_drawVertexArray(elements->window, va, tmp);
         refresh_elements(elements);
     }
     

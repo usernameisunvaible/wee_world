@@ -7,7 +7,7 @@ float dcos(float deg);
 float dsin(float deg);
 double dist_points(sfVector2f pa, sfVector2f pb);
 map_ *load_map(char *str_map, sfVector2i size, elements_t *elements);
-void refresh_map(elements_t *elements, map_ *map);
+void refresh_map(elements_t *elements, map_ *map, sfRenderStates *tmp);
 float pythagore(float a, float b);
 
 #endif //PROTO_H

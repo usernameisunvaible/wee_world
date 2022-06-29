@@ -10,10 +10,10 @@ static cube_ *load_cube(sfVector2i id, char *str_map, sfVector2i size, elements_
     cube->pos_on_screen = define_vectorf( (dcos(25) * id.x - dcos(25) * id.y) * (elements->win_size.x/RECT_SIZE) + elements->win_size.x/2, (dsin(25) * id.y + dsin(25) * id.x - str_map[id.y * size.x + id.x]) * (elements->win_size.x/RECT_SIZE) - mid );
     cube->top = sfVertexArray_create();
     sfVertexArray_setPrimitiveType(cube->top, sfQuads);
-    sfVertexArray_append(cube->top, define_vertex(cube->pos_on_screen, sfGreen));
-    sfVertexArray_append(cube->top, define_vertex(define_vectorf((dcos(25) * id.x - dcos(25) * (id.y + 1)) * (elements->win_size.x/RECT_SIZE) + elements->win_size.x/2, (dsin(25) * (id.y + 1) + dsin(25) * id.x - str_map[id.y * size.x + id.x]) * (elements->win_size.x/RECT_SIZE) - mid ), sfGreen));
-    sfVertexArray_append(cube->top, define_vertex(define_vectorf((dcos(25) * (id.x + 1) - dcos(25) * (id.y + 1)) * (elements->win_size.x/RECT_SIZE)+ elements->win_size.x/2, (dsin(25) * (id.y + 1) + dsin(25) * (id.x + 1) - str_map[id.y * size.x + id.x])  * (elements->win_size.x/RECT_SIZE) - mid ), sfGreen));
-    sfVertexArray_append(cube->top, define_vertex(define_vectorf((dcos(25) * (id.x + 1) - dcos(25) * id.y ) * (elements->win_size.x/RECT_SIZE) + elements->win_size.x/2, (dsin(25) * id.y  + dsin(25) * (id.x + 1) - str_map[id.y * size.x + id.x]) * (elements->win_size.x/RECT_SIZE) - mid  ), sfGreen));
+    sfVertexArray_append(cube->top, define_vertex(cube->pos_on_screen, sfGreen , define_vectorf(0, 0)));
+    sfVertexArray_append(cube->top, define_vertex(define_vectorf((dcos(25) * id.x - dcos(25) * (id.y + 1)) * (elements->win_size.x/RECT_SIZE) + elements->win_size.x/2, (dsin(25) * (id.y + 1) + dsin(25) * id.x - str_map[id.y * size.x + id.x]) * (elements->win_size.x/RECT_SIZE) - mid ), sfGreen, define_vectorf(512, 0)));
+    sfVertexArray_append(cube->top, define_vertex(define_vectorf((dcos(25) * (id.x + 1) - dcos(25) * (id.y + 1)) * (elements->win_size.x/RECT_SIZE)+ elements->win_size.x/2, (dsin(25) * (id.y + 1) + dsin(25) * (id.x + 1) - str_map[id.y * size.x + id.x])  * (elements->win_size.x/RECT_SIZE) - mid ), sfGreen, define_vectorf(512, 512)));
+    sfVertexArray_append(cube->top, define_vertex(define_vectorf((dcos(25) * (id.x + 1) - dcos(25) * id.y ) * (elements->win_size.x/RECT_SIZE) + elements->win_size.x/2, (dsin(25) * id.y  + dsin(25) * (id.x + 1) - str_map[id.y * size.x + id.x]) * (elements->win_size.x/RECT_SIZE) - mid  ), sfGreen,  define_vectorf(0, 512)));
 
     return cube;
 }

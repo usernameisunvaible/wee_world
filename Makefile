@@ -7,7 +7,7 @@
 
 NAME	=	myWorld_two
 CFLAGS	+=	-g
-FLAGS = -lcsfml-graphics -lcsfml-window -lcsfml-system 
+FLAGS = -lcsfml-graphics -lcsfml-window -lcsfml-system -lm
 
 
 

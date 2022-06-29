@@ -1,18 +1,28 @@
 #ifndef INCLUDES_H
     #define INCLUDES_H
 
-#include <time.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
-#include <errno.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <malloc.h>
-#include <share.h>
-#include <io.h>
-#include <mem.h>
-#include <math.h>
+
+#if defined WIN32
+    #include <time.h>
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <stdio.h>
+    #include <errno.h>
+    #include <stdlib.h>
+    #include <fcntl.h>
+    #include <malloc.h>
+    #include <share.h>
+    #include <io.h>
+    #include <mem.h>
+    #include <math.h>
+#else
+    #include <math.h>
+    #include <unistd.h>
+    #include <time.h>
+    #include <stdlib.h>
+    #include <stdio.h>
+#endif
+
 
 
 
@@ -30,7 +40,7 @@
     #define KEY_CODE elements->event.key.code
     #define PI 3.1415
 
-    #define RECT_SIZE 150
+    #define RECT_SIZE 50
 
 
 
