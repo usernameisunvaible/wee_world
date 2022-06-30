@@ -15,9 +15,19 @@ typedef struct {
 }cube_;
 
 typedef struct {
+    float cos_angle;
+    float sin_angle;
+    float mid_y;
+    float mid_x;
+    float bloc_size;
+
+}math_inf_;
+
+typedef struct {
     cube_ **cube_map;
     int angle;
     sfVector2i size;
+    math_inf_ *infos;
 }map_;
 
 typedef struct {
@@ -25,5 +35,7 @@ typedef struct {
     int type;
     sfColor bgcolor;
 }texture_;
+
+
 
 #endif //MAP_H

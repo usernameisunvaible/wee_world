@@ -2,6 +2,7 @@
     #define INCLUDES_H
 
 
+
 #if defined WIN32
     #include <time.h>
     #include <sys/types.h>
@@ -43,11 +44,11 @@
 
     #define RECT_SIZE 75
 
-    #define NORD_OUEST ((dcos(25) * id.x - dcos(25) * id.y) * (elements->win_size.x/RECT_SIZE) + elements->win_size.x/2) , ((dsin(25) * id.y + dsin(25) * id.x - str_map[id.y * size.x + id.x]) * (elements->win_size.x/RECT_SIZE) - mid) 
+    #define NORD_OUEST ((infos->cos_angle * id.x - infos->cos_angle * id.y) * infos->bloc_size + infos->mid_x) , ((infos->sin_angle * id.y + infos->sin_angle * id.x - str_map[id.y * size.x + id.x]) * infos->bloc_size - infos->mid_y) 
 
-    #define SUD_OUEST ((dcos(25) * id.x - dcos(25) * (id.y + 1)) * (elements->win_size.x/RECT_SIZE) + elements->win_size.x/2) , ((dsin(25) * (id.y + 1) + dsin(25) * id.x - str_map[id.y * size.x + id.x]) * (elements->win_size.x/RECT_SIZE) - mid)
+    #define SUD_OUEST ((infos->cos_angle * id.x - infos->cos_angle * (id.y + 1)) * infos->bloc_size + infos->mid_x) , ((infos->sin_angle * (id.y + 1) + infos->sin_angle * id.x - str_map[id.y * size.x + id.x]) * infos->bloc_size - infos->mid_y)
 
-    #define SUD_EST ((dcos(25) * (id.x + 1) - dcos(25) * (id.y + 1)) * (elements->win_size.x/RECT_SIZE)+ elements->win_size.x/2) , ((dsin(25) * (id.y + 1) + dsin(25) * (id.x + 1) - str_map[id.y * size.x + id.x])  * (elements->win_size.x/RECT_SIZE) - mid) 
+    #define SUD_EST ((infos->cos_angle * (id.x + 1) - infos->cos_angle * (id.y + 1)) * infos->bloc_size + infos->mid_x) , ((infos->sin_angle * (id.y + 1) + infos->sin_angle * (id.x + 1) - str_map[id.y * size.x + id.x])  * infos->bloc_size - infos->mid_y) 
 
-    #define NORD_EST ((dcos(25) * (id.x + 1) - dcos(25) * id.y ) * (elements->win_size.x/RECT_SIZE) + elements->win_size.x/2) , ((dsin(25) * id.y  + dsin(25) * (id.x + 1) - str_map[id.y * size.x + id.x]) * (elements->win_size.x/RECT_SIZE) - mid)
+    #define NORD_EST ((infos->cos_angle * (id.x + 1) - infos->cos_angle * id.y ) * infos->bloc_size + infos->mid_x) , ((infos->sin_angle * id.y  + infos->sin_angle * (id.x + 1) - str_map[id.y * size.x + id.x]) * infos->bloc_size - infos->mid_y)
 #endif //INCLUDES_H
