@@ -3,7 +3,7 @@
 elements_t *load_assets(sfVector2i screen)
 {
     char *textures[] = {"\0"};
-    char *fonts[] = {"\0"};
+    char *fonts[] = {"assets/akhirtathun.ttf", "\0"};
     return init_elements(textures, fonts, screen);
 }
 
@@ -22,13 +22,17 @@ int main (int ac, char **av)
     }
     map_ *s_map = load_map(map, define_vectori(64, 64), elements);
     texture_ **textures = init_mapstates();
-    
+    sfText *fps = text_factory(define_text_params("0","assets/akhirtathun.ttf", define_vectorf(0, 0), 25), elements);
+    char buf[4];
+    chunk_ *chunk = load_chunk(0);
+
     while (sfRenderWindow_isOpen(elements->window)) {
+        sfRenderWindow_clear(elements->window, sfBlack);
         key_events(elements);
-        
-        printf("%f\n", elements->fps->fps);
-        refresh_map(elements, s_map, textures);
-        
+        generate_chunk_arrays(s_map, chunk, elements);
+        refresh_chunk(define_vectorf(0, 0), chunk, elements, textures);
+        // refresh_map(elements, s_map, textures);
+        refresh_text(elements, fps, itoa((int) elements->fps->fps, buf));
         refresh_elements(elements);
     }
     

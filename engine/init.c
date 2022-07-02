@@ -20,7 +20,7 @@ elements_t *init_elements(char **textures_path, char **font_path_list, sfVector2
     sfVideoMode mode = {elements->win_size.x, elements->win_size.y, 32};
     elements->window = sfRenderWindow_create(mode, "RPG",
 sfClose | sfFullscreen, NULL);
-    sfWindow_setFramerateLimit(elements->window, 60);
+    sfRenderWindow_setFramerateLimit(elements->window, 1000);
     elements->tex_list = init_tex(textures_path);
     elements->font_list = init_font(font_path_list);
     elements->chrono = init_chrono();

@@ -37,6 +37,8 @@ SRC	=	engine/sprite.c	\
 		sources/map.c	\
 		sources/init_map_textures.c	\
 		sources/perlin_noise.c	\
+		sources/itoa.c	\
+		sources/load_chunks.c	\
 
 
 OBJ	=	$(SRC:.c=.o)

@@ -25,7 +25,7 @@ void load_maths_infos(int  angle, elements_t *elements, sfVector2i size, math_in
     infos->offset = define_vectorf(15, 15);
 }
 
-static cube_ *load_cube(sfVector2i id, char *str_map, sfVector2i size, elements_t *elements, int type, math_inf_ *infos)
+cube_ *load_cube(sfVector2i id, char *str_map, elements_t *elements, int type, math_inf_ *infos)
 {
     cube_ *cube = malloc(sizeof(cube_));
     sfColor color_top = select_colortop(type);
@@ -41,7 +41,7 @@ static cube_ *load_cube(sfVector2i id, char *str_map, sfVector2i size, elements_
     sfVertexArray_append(cube->top, define_vertex(define_vectorf(SUD_EST), color_top, define_vectorf(512, 512)));
     sfVertexArray_append(cube->top, define_vertex(define_vectorf(SUD_OUEST), color_top,  define_vectorf(0, 512)));
 
-    cube->height = str_map[id.y * size.x + id.x];
+    cube->height = str_map[id.y * 32  + id.x];
 
     cube->south = malloc(sizeof(sfVertexArray *) * cube->height);
     cube->east = malloc(sizeof(sfVertexArray *) * cube->height);
@@ -66,19 +66,31 @@ static cube_ *load_cube(sfVector2i id, char *str_map, sfVector2i size, elements_
     return cube;
 }
 
+void free_cube(cube_ *cube)
+{
+    for (int i = 0; i < cube->height; ++i) {
+        sfVertexArray_destroy(cube->south[i]);
+        sfVertexArray_destroy(cube->east[i]);
+    }
+    free(cube->south);
+    free(cube->east);
+    sfVertexArray_destroy(cube->top);
+    free(cube);
+}
+
 map_ *load_map(char *str_map, sfVector2i size, elements_t *elements)
 {
 
     map_ *map = malloc(sizeof(map_));
-    map->angle = 0;
-    map->size = size;
-    map->cube_map = malloc(sizeof(cube_ *) * size.x * size.y);
+    // map->angle = 0;
+    // map->size = size;
+    // map->cube_map = malloc(sizeof(cube_ *) * size.x * size.y);
     map->infos = malloc(sizeof(math_inf_));
     load_maths_infos(25, elements, size, map->infos);
-    for (int i = 0; i < size.x; ++i) {
-        for (int j = 0; j < size.y; ++j) {
-            map->cube_map[j * size.x + i] = load_cube(define_vectori(i, j), str_map, size, elements, 1, map->infos);
-        }
-    }
+    // for (int i = 0; i < size.x; ++i) {
+    //     for (int j = 0; j < size.y; ++j) {
+    //         map->cube_map[j * size.x + i] = load_cube(define_vectori(i, j), str_map, size, elements, 1, map->infos);
+    //     }
+    // }
     return map;
 }
