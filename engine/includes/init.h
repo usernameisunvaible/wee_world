@@ -11,6 +11,12 @@
     #define CLICK_F 1
     #define SHOW_F 1 << 1
 
+typedef struct {
+    long last;
+    float fps;
+}fps_;
+
+
 typedef struct elements_s {
     sfRenderWindow *window;
     sfEvent event;
@@ -22,6 +28,7 @@ typedef struct elements_s {
     sfBool left;
     sfBool right;
     int is_on_p_menu;
+    fps_ *fps;
 }elements_t;
 
     #include "init_p.h"

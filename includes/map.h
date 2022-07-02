@@ -20,6 +20,7 @@ typedef struct {
     float mid_y;
     float mid_x;
     float bloc_size;
+    sfVector2f offset;
 
 }math_inf_;
 

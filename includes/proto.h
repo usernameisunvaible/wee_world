@@ -10,6 +10,6 @@ map_ *load_map(char *str_map, sfVector2i size, elements_t *elements);
 void refresh_map(elements_t *elements, map_ *map, texture_ **list);
 float pythagore(float a, float b);
 texture_ **init_mapstates(void);
-
+float perlin2d(float x, float y, float freq, int depth);
 
 #endif //PROTO_H

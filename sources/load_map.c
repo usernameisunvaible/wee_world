@@ -22,6 +22,7 @@ void load_maths_infos(int  angle, elements_t *elements, sfVector2i size, math_in
     infos->sin_angle = dsin(angle);
     infos->mid_x = elements->win_size.x/2;
     infos->mid_y = ((infos->sin_angle * (size.y / 2) + infos->sin_angle * (size.x / 2)) * (infos->bloc_size)) - (elements->win_size.y / 2);
+    infos->offset = define_vectorf(15, 15);
 }
 
 static cube_ *load_cube(sfVector2i id, char *str_map, sfVector2i size, elements_t *elements, int type, math_inf_ *infos)

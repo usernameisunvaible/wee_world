@@ -34,6 +34,7 @@
 #include "../engine/includes/include_engine.h"
 
 #include "map.h"
+#include "chunk.h"
 
 #include "proto.h"
 
@@ -44,11 +45,14 @@
 
     #define RECT_SIZE 75
 
-    #define NORD_OUEST ((infos->cos_angle * id.x - infos->cos_angle * id.y) * infos->bloc_size + infos->mid_x) , ((infos->sin_angle * id.y + infos->sin_angle * id.x - str_map[id.y * size.x + id.x]) * infos->bloc_size - infos->mid_y) 
 
-    #define SUD_OUEST ((infos->cos_angle * id.x - infos->cos_angle * (id.y + 1)) * infos->bloc_size + infos->mid_x) , ((infos->sin_angle * (id.y + 1) + infos->sin_angle * id.x - str_map[id.y * size.x + id.x]) * infos->bloc_size - infos->mid_y)
+    #define NB_CHUNK_MAX 31250
 
-    #define SUD_EST ((infos->cos_angle * (id.x + 1) - infos->cos_angle * (id.y + 1)) * infos->bloc_size + infos->mid_x) , ((infos->sin_angle * (id.y + 1) + infos->sin_angle * (id.x + 1) - str_map[id.y * size.x + id.x])  * infos->bloc_size - infos->mid_y) 
+    #define NORD_OUEST ((infos->cos_angle * id.x - infos->cos_angle * id.y) * infos->bloc_size + infos->mid_x + infos->offset.x) , ((infos->sin_angle * id.y + infos->sin_angle * id.x - str_map[id.y * size.x + id.x]) * infos->bloc_size - infos->mid_y + infos->offset.y) 
 
-    #define NORD_EST ((infos->cos_angle * (id.x + 1) - infos->cos_angle * id.y ) * infos->bloc_size + infos->mid_x) , ((infos->sin_angle * id.y  + infos->sin_angle * (id.x + 1) - str_map[id.y * size.x + id.x]) * infos->bloc_size - infos->mid_y)
+    #define SUD_OUEST ((infos->cos_angle * id.x - infos->cos_angle * (id.y + 1)) * infos->bloc_size + infos->mid_x  + infos->offset.x) , ((infos->sin_angle * (id.y + 1) + infos->sin_angle * id.x - str_map[id.y * size.x + id.x]) * infos->bloc_size - infos->mid_y + infos->offset.y)
+
+    #define SUD_EST ((infos->cos_angle * (id.x + 1) - infos->cos_angle * (id.y + 1)) * infos->bloc_size + infos->mid_x + infos->offset.x) , ((infos->sin_angle * (id.y + 1) + infos->sin_angle * (id.x + 1) - str_map[id.y * size.x + id.x])  * infos->bloc_size - infos->mid_y + infos->offset.y) 
+
+    #define NORD_EST ((infos->cos_angle * (id.x + 1) - infos->cos_angle * id.y ) * infos->bloc_size + infos->mid_x + infos->offset.x) , ((infos->sin_angle * id.y  + infos->sin_angle * (id.x + 1) - str_map[id.y * size.x + id.x]) * infos->bloc_size - infos->mid_y + infos->offset.y)
 #endif //INCLUDES_H
