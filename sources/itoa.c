@@ -11,7 +11,7 @@ void reverse(char s[])
     }
 }
 
-char *itoa(int n, char *s)
+char *my_itoa(int n, char *s)
 {
     int i, sign;
 

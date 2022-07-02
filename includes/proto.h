@@ -11,7 +11,7 @@ void refresh_map(elements_t *elements, map_ *map, texture_ **list);
 float pythagore(float a, float b);
 texture_ **init_mapstates(void);
 float perlin2d(float x, float y, float freq, int depth);
-char *itoa(int n, char *s);
+char *my_itoa(int n, char *s);
 cube_ *load_cube(sfVector2i id, char *str_map, elements_t *elements, int type, math_inf_ *infos);
 chunk_ *load_chunk(unsigned int coords);
 void refresh_chunk(sfVector2f player_pos, chunk_ *chunk, elements_t *elements, texture_ **list);

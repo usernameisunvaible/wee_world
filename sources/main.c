@@ -32,7 +32,7 @@ int main (int ac, char **av)
         generate_chunk_arrays(s_map, chunk, elements);
         refresh_chunk(define_vectorf(0, 0), chunk, elements, textures);
         // refresh_map(elements, s_map, textures);
-        refresh_text(elements, fps, itoa((int) elements->fps->fps, buf));
+        refresh_text(elements, fps, my_itoa((int) elements->fps->fps, buf));
         refresh_elements(elements);
     }
     
