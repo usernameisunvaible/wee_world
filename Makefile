@@ -39,6 +39,8 @@ SRC	=	engine/sprite.c	\
 		sources/perlin_noise.c	\
 		sources/itoa.c	\
 		sources/load_chunks.c	\
+		sources/init_player.c	\
+		sources/player.c	\
 
 
 OBJ	=	$(SRC:.c=.o)

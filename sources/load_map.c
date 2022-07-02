@@ -17,15 +17,14 @@ static sfColor select_coloreast(int type)
 
 void load_maths_infos(int  angle, elements_t *elements, sfVector2i size, math_inf_ *infos)
 {
-    infos->bloc_size = (elements->win_size.x/RECT_SIZE);
+    infos->bloc_size = 40; //(elements->win_size.x/RECT_SIZE);
     infos->cos_angle = dcos(angle);
     infos->sin_angle = dsin(angle);
     infos->mid_x = elements->win_size.x/2;
-    infos->mid_y = ((infos->sin_angle * (size.y / 2) + infos->sin_angle * (size.x / 2)) * (infos->bloc_size)) - (elements->win_size.y / 2);
-    infos->offset = define_vectorf(15, 15);
+    infos->offset = define_vectorf(infos->mid_x + 33, 680);
 }
 
-cube_ *load_cube(sfVector2i id, char *str_map, elements_t *elements, int type, math_inf_ *infos, sfVector2i real_id)
+cube_ *load_cube(sfVector2i id, char *str_map, elements_t *elements, int type, math_inf_ *infos, sfVector2i real_id, sfBool player)
 {
     cube_ *cube = malloc(sizeof(cube_));
     sfColor color_top = select_colortop(type);
@@ -36,6 +35,10 @@ cube_ *load_cube(sfVector2i id, char *str_map, elements_t *elements, int type, m
     cube->pos_on_screen = define_vectorf(NORD_OUEST);
     cube->top = sfVertexArray_create();
     sfVertexArray_setPrimitiveType(cube->top, sfQuads);
+    if (real_id.x == 16 && real_id.y == 16)
+        color_top = sfBlue;
+    // if (player)
+    //     color_top = sfRed;
     sfVertexArray_append(cube->top, define_vertex(cube->pos_on_screen, color_top , define_vectorf(0, 0)));
     sfVertexArray_append(cube->top, define_vertex(define_vectorf(NORD_EST), color_top, define_vectorf(512, 0)));
     sfVertexArray_append(cube->top, define_vertex(define_vectorf(SUD_EST), color_top, define_vectorf(512, 512)));

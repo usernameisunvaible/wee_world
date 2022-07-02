@@ -17,7 +17,6 @@ typedef struct {
 typedef struct {
     float cos_angle;
     float sin_angle;
-    float mid_y;
     float mid_x;
     float bloc_size;
     sfVector2f offset;
