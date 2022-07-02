@@ -47,7 +47,7 @@ cube_ *load_cube(sfVector2i id, char *str_map, elements_t *elements, int type, m
     for (int i = 0; i < cube->height; ++i) {
         cube->south[i] = NULL;
 
-        if (real_id.y < 31 && str_map[(real_id.y + 1) * 32  + real_id.x] < str_map[real_id.y * 32  + real_id.x]) {
+        if (real_id.y < 31 && str_map[(real_id.y + 1) * 32  + real_id.x] < str_map[real_id.y * 32  + real_id.x] && i < str_map[real_id.y * 32  + real_id.x] - str_map[(real_id.y + 1) * 32  + real_id.x]  ) {
             cube->south[i] = sfVertexArray_create();
             sfVertexArray_setPrimitiveType(cube->south[i], sfQuads);
             sfVertexArray_append(cube->south[i], define_vertex(define_vectorf(SUD_EST + infos->bloc_size * i), color_south, define_vectorf(0, 0)));
@@ -56,7 +56,7 @@ cube_ *load_cube(sfVector2i id, char *str_map, elements_t *elements, int type, m
             sfVertexArray_append(cube->south[i], define_vertex(define_vectorf(SUD_EST + infos->bloc_size* (i + 1)), color_south, define_vectorf(512, 0)));
         }
         cube->east[i] = NULL;
-        if (real_id.x < 31 && str_map[real_id.y * 32  + real_id.x + 1] < str_map[real_id.y * 32  + real_id.x]) {
+        if (real_id.x < 31 && str_map[real_id.y * 32  + real_id.x + 1] < str_map[real_id.y * 32  + real_id.x] && i < str_map[real_id.y * 32  + real_id.x] - str_map[real_id.y * 32  + real_id.x + 1]) {
             cube->east[i] = sfVertexArray_create();
             sfVertexArray_setPrimitiveType(cube->east[i], sfQuads);
             sfVertexArray_append(cube->east[i], define_vertex(define_vectorf(SUD_EST + infos->bloc_size * i), color_east, define_vectorf(0, 0)));
