@@ -3,28 +3,18 @@
 
 void main_keys(elements_t *elements, player_ *player)
 {
-    if (KEY_CODE == sfKeyZ) {
-       player->pos_on_map.y -= 7;
-       player->pos_on_map.x -= 7;
-    }
-    if (KEY_CODE == sfKeyS) {
-       player->pos_on_map.y += 7;
-       player->pos_on_map.x += 7;
-    }
-    if (KEY_CODE == sfKeyQ) {
-       player->pos_on_map.y += 7;
-       player->pos_on_map.x -= 7;
-    }
-    if (KEY_CODE == sfKeyD) {
-       player->pos_on_map.y -= 7;
-       player->pos_on_map.x += 7;
-    }
-    // (KEY_CODE == sfKeyS) ? (player->pos_on_map.y -= 5) : (0);
+    if (KEY_CODE == sfKeyZ) {player->move = player->move | TOP;}
+    if (KEY_CODE == sfKeyS) {player->move = player->move | BOTTOM;}
+    if (KEY_CODE == sfKeyQ) {player->move = player->move | LEFT;}
+    if (KEY_CODE == sfKeyD) {player->move = player->move | RIGHT;}
+}
 
-    // (KEY_CODE == sfKeyQ) ? (player->pos_on_map.x += 5) : (0);
-    // (KEY_CODE == sfKeyD) ? (player->pos_on_map.x -= 5) : (0);
-
-
+void main_released(elements_t *elements, player_ *player)
+{
+    if (KEY_CODE == sfKeyZ) {player->move = (255 ^ TOP) & player->move;}
+    if (KEY_CODE == sfKeyS) {player->move = (255 ^ BOTTOM) & player->move;}
+    if (KEY_CODE == sfKeyQ) {player->move = (255 ^ LEFT) & player->move;}
+    if (KEY_CODE == sfKeyD) {player->move = (255 ^ RIGHT) & player->move;}
 }
 
 void key_events(elements_t *elements, player_ *player)
@@ -34,6 +24,9 @@ void key_events(elements_t *elements, player_ *player)
             sfRenderWindow_close(elements->window);
         if (elements->event.type == sfEvtKeyPressed) {
             main_keys(elements, player);
+        }
+        if (elements->event.type == sfEvtKeyReleased) {
+            main_released(elements, player);
         }
     }
 

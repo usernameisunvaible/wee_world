@@ -17,7 +17,7 @@ static sfColor select_coloreast(int type)
 
 void load_maths_infos(int  angle, elements_t *elements, sfVector2i size, math_inf_ *infos)
 {
-    infos->bloc_size = 40; //(elements->win_size.x/RECT_SIZE);
+    infos->bloc_size = (elements->win_size.x/RECT_SIZE);
     infos->cos_angle = dcos(angle);
     infos->sin_angle = dsin(angle);
     infos->mid_x = elements->win_size.x/2;
@@ -58,6 +58,14 @@ cube_ *load_cube(sfVector2i id, char *str_map, elements_t *elements, int type, m
             sfVertexArray_append(cube->south[i], define_vertex(define_vectorf(SUD_OUEST  + infos->bloc_size * (i + 1)), color_south,  define_vectorf(512, 512)));
             sfVertexArray_append(cube->south[i], define_vertex(define_vectorf(SUD_EST + infos->bloc_size* (i + 1)), color_south, define_vectorf(512, 0)));
         }
+        if (real_id.y == 31) {
+            cube->south[i] = sfVertexArray_create();
+            sfVertexArray_setPrimitiveType(cube->south[i], sfQuads);
+            sfVertexArray_append(cube->south[i], define_vertex(define_vectorf(SUD_EST + infos->bloc_size * i), color_south, define_vectorf(0, 0)));
+            sfVertexArray_append(cube->south[i], define_vertex(define_vectorf(SUD_OUEST + infos->bloc_size * i ), color_south,  define_vectorf(0, 512)));
+            sfVertexArray_append(cube->south[i], define_vertex(define_vectorf(SUD_OUEST  + infos->bloc_size * (i + 1)), color_south,  define_vectorf(512, 512)));
+            sfVertexArray_append(cube->south[i], define_vertex(define_vectorf(SUD_EST + infos->bloc_size* (i + 1)), color_south, define_vectorf(512, 0)));
+        }
         cube->east[i] = NULL;
         if (real_id.x < 31 && str_map[real_id.y * 32  + real_id.x + 1] < str_map[real_id.y * 32  + real_id.x] && i < str_map[real_id.y * 32  + real_id.x] - str_map[real_id.y * 32  + real_id.x + 1]) {
             cube->east[i] = sfVertexArray_create();
@@ -66,6 +74,15 @@ cube_ *load_cube(sfVector2i id, char *str_map, elements_t *elements, int type, m
             sfVertexArray_append(cube->east[i], define_vertex(define_vectorf(NORD_EST + infos->bloc_size * i), color_east,  define_vectorf(0, 512)));
             sfVertexArray_append(cube->east[i], define_vertex(define_vectorf(NORD_EST  + infos->bloc_size * (i + 1)), color_east,  define_vectorf(512, 512)));
             sfVertexArray_append(cube->east[i], define_vertex(define_vectorf(SUD_EST + infos->bloc_size * (i + 1)), color_east, define_vectorf(512, 0)));
+        }
+        if (real_id.x == 31) {
+            cube->east[i] = sfVertexArray_create();
+            sfVertexArray_setPrimitiveType(cube->east[i], sfQuads);
+            sfVertexArray_append(cube->east[i], define_vertex(define_vectorf(SUD_EST + infos->bloc_size * i), color_east, define_vectorf(0, 0)));
+            sfVertexArray_append(cube->east[i], define_vertex(define_vectorf(NORD_EST + infos->bloc_size * i), color_east,  define_vectorf(0, 512)));
+            sfVertexArray_append(cube->east[i], define_vertex(define_vectorf(NORD_EST  + infos->bloc_size * (i + 1)), color_east,  define_vectorf(512, 512)));
+            sfVertexArray_append(cube->east[i], define_vertex(define_vectorf(SUD_EST + infos->bloc_size * (i + 1)), color_east, define_vectorf(512, 0)));
+
         }
     }
     
@@ -88,6 +105,8 @@ void free_cube(cube_ *cube)
 map_ *load_map(char *str_map, sfVector2i size, elements_t *elements)
 {
     map_ *map = malloc(sizeof(map_));
+    map->chunk_list = malloc(sizeof(chunk_ *) * 9);
+    map->chunk_list[0] = load_chunk(0);
     map->infos = malloc(sizeof(math_inf_));
     load_maths_infos(25, elements, size, map->infos);
     return map;

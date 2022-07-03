@@ -18,7 +18,9 @@ void refresh_chunk(chunk_ *chunk, elements_t *elements, texture_ **list);
 void generate_chunk_arrays(sfVector3f player_pos, map_ *map, chunk_ *chunk, elements_t *elements);
 void free_cube(cube_ *cube);
 player_ *init_player(void);
-void move_player(player_ *player, chunk_ *chunk, map_ *s_map);
 sfVector2f get_pos_on_map(player_ *player, map_ *s_map);
+void appli_move(player_ *player, map_ *s_map, elements_t *elements, chunk_ *chunk);
+void move_player(player_ *player, elements_t *elements);
+unsigned int player_chunk(player_ *player, map_ *s_map);
 
 #endif //PROTO_H
