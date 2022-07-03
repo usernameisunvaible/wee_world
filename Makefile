@@ -5,7 +5,7 @@
 ## makefile
 ##
 
-NAME	=	myWorld_two
+NAME	=	WeeWorld
 CFLAGS	+=	-g
 FLAGS = -lcsfml-graphics -lcsfml-window -lcsfml-system -lm
 
