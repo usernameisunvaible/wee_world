@@ -18,7 +18,7 @@ elements_t *init_elements(char **textures_path, char **font_path_list, sfVector2
 
     elements->win_size = define_vectorf(size.x, size.y);
     sfVideoMode mode = {elements->win_size.x, elements->win_size.y, 32};
-    elements->window = sfRenderWindow_create(mode, "RPG",
+    elements->window = sfRenderWindow_create(mode, "WeeWorld",
 sfClose | sfFullscreen, NULL);
     // sfRenderWindow_setFramerateLimit(elements->window, 60);
     elements->tex_list = init_tex(textures_path);

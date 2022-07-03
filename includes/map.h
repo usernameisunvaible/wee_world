@@ -12,7 +12,8 @@ typedef struct {
     float mid_x;
     float bloc_size;
     sfVector2f offset;
-
+    unsigned int *arround_chunks;
+    int seed;
 }math_inf_;
 
 typedef struct {

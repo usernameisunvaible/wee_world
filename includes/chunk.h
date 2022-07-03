@@ -15,7 +15,7 @@ typedef struct {
 
 typedef struct {
     char *mapping;
-    int coords;
+    unsigned int coords;
     cube_ **cube_map;
 }chunk_;
 

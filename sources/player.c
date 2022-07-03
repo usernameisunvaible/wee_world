@@ -52,9 +52,43 @@ void move_player(player_ *player, elements_t *elements)
     player->timer.y = elements->chrono->ms;
 }
 
+
+chunk_ *wich_chunk(unsigned int player_chunk, map_ *map)
+{
+    int a = 0;
+
+    for (int i = 0; i < 9; ++i) {
+        a = 0;
+        for (int j = 0; j < 9; ++j) {
+            if (map->chunk_list[i]->coords == player_chunk - map->infos->arround_chunks[j])
+                a = 1;
+                
+        }
+        if (a == 0)
+            break;
+    }
+
+    if (a == 0) {
+        for (int i = 0; i < 9; ++i) {
+            free_chunk(map->chunk_list[i]);
+            map->chunk_list[i] = NULL;
+        }
+        load_near_chunks(player_chunk, map->chunk_list, map->infos->seed);
+    } else {
+        for (int i = 0; i < 9; ++i) {
+            for (int j = 0; j < 1024; ++j) {
+                free_cube(map->chunk_list[i]->cube_map[j]);
+            }
+        }
+    }
+
+    for (int i = 0; i < 9; ++i) {
+        if (map->chunk_list[i]->coords == player_chunk)
+            return map->chunk_list[i];
+    }
+}
+
 unsigned int player_chunk(player_ *player, map_ *s_map)
 {
-    // printf("%f %f\n", get_pos_on_map(player, s_map).x, get_pos_on_map(player, s_map).y);
-
     return ((int)(get_pos_on_map(player, s_map).y / 32) * NB_CHUNK_MAX) + (int)(get_pos_on_map(player, s_map).x / 32);
 }

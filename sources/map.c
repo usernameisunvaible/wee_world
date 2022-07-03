@@ -29,7 +29,6 @@ void refresh_chunk(chunk_ *chunk, elements_t *elements, texture_ **list)
                     sfRenderWindow_drawVertexArray(elements->window, chunk->cube_map[i]->east[j], list[0]->state);
             }
         }
-        free_cube(chunk->cube_map[i]);
 
     }
 }

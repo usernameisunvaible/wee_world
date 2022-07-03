@@ -25,7 +25,7 @@ sfVector2i define_vectori(int x, int y);
 sfVector2f define_vectorf(float x, float y);
 sfVector3f define_vectortf(float x, float y, float z);
 int str_comp(char *stra, char *strb);
-sfVertex define_vertex(sfVector2f pos, sfColor color, sfVector2f texcord);
+sfVertex *define_vertex(sfVector2f pos, sfColor color, sfVector2f texcord);
 int square(int a);
 
 #endif //LIB_H_
