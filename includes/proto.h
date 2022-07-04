@@ -19,12 +19,14 @@ void generate_chunk_arrays(sfVector3f player_pos, map_ *map, chunk_ *chunk, elem
 void free_cube(cube_ *cube);
 player_ *init_player(map_ *s_map, sfVector2i player_spawn, elements_t *elements);
 sfVector2f get_pos_on_map(player_ *player, map_ *s_map);
-void appli_move(player_ *player, map_ *s_map, elements_t *elements, chunk_ *chunk);
+void appli_move(player_ *player, map_ *s_map, elements_t *elements);
 void move_player(player_ *player, elements_t *elements);
 unsigned int player_chunk(player_ *player, map_ *s_map);
 void load_near_chunks(unsigned int player_chunk, chunk_ **chunk_list, int seed);
-chunk_ *wich_chunk(unsigned int player_chunk, map_ *map);
+void load_arround(unsigned int player_chunk, map_ *map);
 void free_chunk(chunk_ *chunk);
+void jump(player_ *player, elements_t *elements, map_ *s_map, chunk_ *chunk);
+
 
 
 #endif //PROTO_H

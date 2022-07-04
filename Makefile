@@ -41,6 +41,7 @@ SRC	=	engine/sprite.c	\
 		sources/load_chunks.c	\
 		sources/init_player.c	\
 		sources/player.c	\
+		sources/chunk.c	\
 
 
 OBJ	=	$(SRC:.c=.o)

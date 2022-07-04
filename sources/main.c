@@ -21,13 +21,16 @@ int main (int ac, char **av)
     framebuffer_t *fbr = init_framebuffer(define_vectori(elements->win_size.x, elements->win_size.y));
 
 
-
+    player->pos_on_map.z = map->chunk_list[4]->mapping[(int)(get_pos_on_map(player, map).y) % 32 * 32 + (int)(get_pos_on_map(player, map).x) % 32];
     while (sfRenderWindow_isOpen(elements->window)) {
         
         sfRenderWindow_clear(elements->window, sfBlack);
         key_events(elements, player);
         move_player(player, elements);
-        appli_move(player, map, elements, wich_chunk(player_chunk(player, map), map));
+        load_arround(player_chunk(player, map), map);
+        jump(player, elements, map, map->chunk_list[4]);
+        appli_move(player, map, elements);
+        printf("%f\n", player->pos_on_map.z);
         for (int i = 0; i < 9; ++i) {
             generate_chunk_arrays(player->pos_on_map, map, map->chunk_list[i], elements);
             refresh_chunk( map->chunk_list[i], elements, textures);

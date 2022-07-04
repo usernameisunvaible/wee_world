@@ -15,11 +15,19 @@
 #define PL player->move &
 
 typedef struct {
+    sfVector2i timer;
+    float offset;
+    int counter;
+    sfBool active;
+}jump_;
+
+typedef struct {
     sfVector3f pos_on_map;
     sfVector2f pos_on_screen;
     unsigned char move;
     sfVector2u timer;
     sfBool diag;
+    jump_ *jump;
 }player_;
 
 #endif //PLAYER_H

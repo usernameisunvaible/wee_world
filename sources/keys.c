@@ -7,6 +7,7 @@ void main_keys(elements_t *elements, player_ *player)
     if (KEY_CODE == sfKeyS) {player->move = player->move | BOTTOM;}
     if (KEY_CODE == sfKeyQ) {player->move = player->move | LEFT;}
     if (KEY_CODE == sfKeyD) {player->move = player->move | RIGHT;}
+    if (KEY_CODE == sfKeySpace) {player->jump->active = sfTrue;}
 }
 
 void main_released(elements_t *elements, player_ *player)
