@@ -43,7 +43,7 @@ button->pos.height)
     return 0;
 }
 
-void anim_button(button_t *button, elements_t *elements, sfVector2i m_pos)
+static void anim_button(button_t *button, elements_t *elements, sfVector2i m_pos)
 {
     if (mouse_on_but(button, m_pos)) {
         if (elements->left) {
@@ -66,7 +66,8 @@ void show_button(button_t *button, elements_t *elements)
 
 void free_button(button_t *button)
 {
-    free(button->idle);
-    free(button->mouse);
-    free(button->click);
+    free_sprite(button->idle);
+    free_sprite(button->mouse);
+    free_sprite(button->click);
+    free(button);
 }

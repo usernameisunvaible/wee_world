@@ -23,3 +23,19 @@ texture_ **init_mapstates(void)
 
     return list;
 }
+
+void free_renderstates(texture_ *texture)
+{
+    sfTexture_destroy((sfTexture *)texture->state->texture);
+    free(texture->state);
+    free(texture);
+}
+
+void free_mapstates(texture_ **list)
+{
+    int nb = 1;
+
+    for (int i = 0; i < nb; ++i)
+        free_renderstates(list[i]);
+    free(list);
+}

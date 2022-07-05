@@ -16,5 +16,6 @@ void put_pixel(framebuffer_t *fbuffer, int x, int y, sfColor color);
 void draw_circle_from_point(sfVector2i point, int radius,
 framebuffer_t *fbuffer, sfColor color);
 void draw_rect(framebuffer_t *fbuffer, sfIntRect rect, sfColor color);
+void free_framebuffer(framebuffer_t *fbuffer);
 
 #endif // FRAMEBUFFER_P_H_

@@ -13,6 +13,7 @@
 sfIntRect define_rect(int a, int b, int c, int d)
 {
     sfIntRect rect;
+
     rect.left = a;
     rect.top = b;
     rect.width = c;

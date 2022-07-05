@@ -14,5 +14,6 @@
 void free_sprite(sprite_sheet_t *sprite_sheet)
 {
     sfSprite_destroy(sprite_sheet->sprite);
+    free((sfUint8 *)sprite_sheet->pixels);
     free(sprite_sheet);
 }

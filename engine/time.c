@@ -15,13 +15,15 @@ chrono_t *init_chrono(void)
 {
     chrono_t *chrono = malloc(sizeof(chrono_t));
 
+    if (chrono == NULL) {return NULL;}
     chrono->ms = 0;
     chrono->s = 0;
     chrono->clock = sfClock_create();
+    if (chrono->clock == NULL) {free(chrono); return NULL;}
     return chrono;
 }
 
-void elapse_time(chrono_t *chrono)
+void refresh_chrono(chrono_t *chrono)
 {
     chrono->ms = (sfClock_getElapsedTime(chrono->clock).microseconds) / 1000;
     if (chrono->ms > 1000)
@@ -30,5 +32,6 @@ void elapse_time(chrono_t *chrono)
 
 void free_chrono(chrono_t *chrono)
 {
+    sfClock_destroy(chrono->clock);
     free(chrono);
 }

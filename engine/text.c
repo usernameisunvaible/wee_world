@@ -11,7 +11,7 @@
 #include <SFML/Graphics.h>
 #include "includes/include_engine.h"
 
-void add_font(char *path, all_my_font_t **list)
+static void add_font(char *path, all_my_font_t **list)
 {
     all_my_font_t *part = malloc(sizeof(all_my_font_t));
     part->path = path;
@@ -22,9 +22,8 @@ void add_font(char *path, all_my_font_t **list)
 
 all_my_font_t *init_font(char **font_path)
 {
-    all_my_font_t *list = malloc(sizeof(all_my_font_t));
+    all_my_font_t *list = NULL;
 
-    list = NULL;
     for (int i = 0; font_path[i][0]; ++i) {
         add_font(font_path[i], &list);
     }
@@ -65,3 +64,17 @@ sfText *text_factory(text_params_t params, elements_t *elements)
     sfText_setCharacterSize(text, params.size);
     return text;
 }
+
+void free_font(all_my_font_t *list)
+{
+    all_my_font_t *temp;
+
+    temp = list;
+    while (list != NULL) {
+        list = list->next;
+        sfFont_destroy(temp->font);
+        free(temp);
+        temp = list;
+    }
+}
+

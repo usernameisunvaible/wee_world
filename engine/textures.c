@@ -21,42 +21,51 @@ sfTexture *get_texture(char *path, all_my_tex_t *list)
             return temp->texture;
         temp = temp->next;
     }
+    return NULL;
 }
 
-void add_tex(char *path, all_my_tex_t **list)
+static sfBool add_tex(char *path, all_my_tex_t **list)
 {
     sfVector2u buf;
-
     all_my_tex_t *part = malloc(sizeof(all_my_tex_t));
+    part->pixels = malloc(sizeof(sfUint8) * buf.x * buf.y * 4);
+
+    if (part == NULL) {return sfFalse;}
+    if (part->pixels == NULL) {free(part); return sfFalse;}
     part->path = path;
     part->image = sfImage_createFromFile(path);
     part->texture = sfTexture_createFromImage(part->image, NULL);
     buf = sfTexture_getSize(part->texture);
-    part->pixels = malloc(sizeof(sfUint8) * buf.x * buf.y * 4);
     part->pixels = sfImage_getPixelsPtr(part->image);
     part->next = *list;
     *list = part;
+    return sfTrue;
 }
 
-all_my_tex_t *init_tex(char **textures_paths)
-{
-    all_my_tex_t *list = malloc(sizeof(all_my_tex_t));
-
-    list = NULL;
-    for (int i = 0; textures_paths[i][0]; ++i) {
-        add_tex(textures_paths[i], &list);
-    }
-    return list;
-}
-
-void free_tex(all_my_tex_t *list)
+void free_texture(all_my_tex_t *list)
 {
     all_my_tex_t *temp;
 
     temp = list;
     while (list != NULL) {
         list = list->next;
+        sfImage_destroy(temp->image);
+        sfTexture_destroy(temp->texture);
+        free((sfUint8 *)temp->pixels);
         free(temp);
         temp = list;
     }
+}
+
+all_my_tex_t *init_texture(char **textures_paths)
+{
+    all_my_tex_t *list = NULL;
+
+    for (int i = 0; textures_paths[i][0]; ++i) {
+        if (add_tex(textures_paths[i], &list) == sfFalse) {
+            free_texture(list);
+            return NULL;
+        }
+    }
+    return list;
 }

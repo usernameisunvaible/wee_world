@@ -24,10 +24,13 @@ chunk_ *load_chunk(unsigned int coords, int seed)
 
 void free_chunk(chunk_ *chunk)
 {
-    free(chunk->mapping);
-    for (int i = 0; i < 1024; ++i)
-        free_cube(chunk->cube_map[i]);
-    free(chunk->cube_map);
+    if (chunk != NULL) {
+        free(chunk->mapping);
+        for (int i = 0; i < 1024; ++i)
+            free_cube(chunk->cube_map[i]);
+        free(chunk->cube_map);
+    }
+    free(chunk);
 }
 
 void load_near_chunks(unsigned int player_chunk, chunk_ **chunk_list, int seed)

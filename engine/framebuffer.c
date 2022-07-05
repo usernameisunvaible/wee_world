@@ -31,3 +31,12 @@ fbuffer->fbuf_size.x, fbuffer->fbuf_size.y, 0, 0);
     sfSprite_setTexture(fbuffer->sprite, fbuffer->texture, sfFalse);
     sfRenderWindow_drawSprite(elements->window, fbuffer->sprite, NULL);
 }
+
+void free_framebuffer(framebuffer_t *fbuffer)
+{
+    sfTexture_destroy(fbuffer->texture);
+    sfSprite_destroy(fbuffer->sprite);
+    free(fbuffer->framebuffer);
+    free(fbuffer);
+
+}

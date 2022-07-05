@@ -28,7 +28,7 @@ sfIntRect sprite_rect)
     return sprite_p;
 }
 
-void sprite_factory_two(sprite_sheet_t *sprite_sheet, all_my_tex_t *temp,
+static void sprite_factory_two(sprite_sheet_t *sprite_sheet, all_my_tex_t *temp,
 sprite_param_t sprite_p)
 {
     sprite_sheet->pixels = temp->pixels;
@@ -66,7 +66,7 @@ chargement d'un sprite: ", 80);
     write(1, "\n", 1);
 }
 
-void refresh_sprite_count(sprite_sheet_t *sprite_sheet)
+static void refresh_sprite_count(sprite_sheet_t *sprite_sheet)
 {
     ++sprite_sheet->count;
     if (sprite_sheet->count == sprite_sheet->nb_rep)

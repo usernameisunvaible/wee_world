@@ -26,7 +26,9 @@ void load_near_chunks(unsigned int player_chunk, chunk_ **chunk_list, int seed);
 void load_arround(unsigned int player_chunk, map_ *map);
 void free_chunk(chunk_ *chunk);
 void jump(player_ *player, elements_t *elements, map_ *s_map, chunk_ *chunk);
-
+void free_map(map_ *map);
+void free_mapstates(texture_ **list);
+void free_player(player_ *player);
 
 
 #endif //PROTO_H

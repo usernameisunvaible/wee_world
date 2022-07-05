@@ -14,19 +14,27 @@ void generate_chunk_arrays(sfVector3f player_pos, map_ *map, chunk_ *chunk, elem
         ++x;
         y = 0;
     }
-
 }
 
 void refresh_chunk(chunk_ *chunk, elements_t *elements, texture_ **list)
 {
+    sfVector2f temp;
     for (int i = 0; i < 1024; ++i) {
         if (chunk->cube_map[i]->type == 1) {
-            sfRenderWindow_drawVertexArray(elements->window, chunk->cube_map[i]->top, list[0]->state);
+            temp = sfVertexArray_getVertex(chunk->cube_map[i]->top, 0)->position;
+            if (temp.x > -50 && temp.x < elements->win_size.x + 50 && temp.y > -50 && temp.y < elements->win_size.y + 50)
+                sfRenderWindow_drawVertexArray(elements->window, chunk->cube_map[i]->top, list[0]->state);
             for (int j = 0; j < chunk->cube_map[i]->height; ++j) {
-                if (chunk->cube_map[i]->south[j] != NULL)
-                    sfRenderWindow_drawVertexArray(elements->window, chunk->cube_map[i]->south[j], list[0]->state);
-                if (chunk->cube_map[i]->east[j] != NULL)
-                    sfRenderWindow_drawVertexArray(elements->window, chunk->cube_map[i]->east[j], list[0]->state);
+                if (chunk->cube_map[i]->south[j] != NULL) {
+                    temp = sfVertexArray_getVertex(chunk->cube_map[i]->south[j], 0)->position;
+                    if (temp.x > -50 && temp.x < elements->win_size.x + 50 && temp.y > -50 && temp.y < elements->win_size.y + 50)
+                        sfRenderWindow_drawVertexArray(elements->window, chunk->cube_map[i]->south[j], list[0]->state);
+                }
+                if (chunk->cube_map[i]->east[j] != NULL) {
+                    temp = sfVertexArray_getVertex(chunk->cube_map[i]->east[j], 0)->position;
+                        if (temp.x > -50 && temp.x < elements->win_size.x + 50 && temp.y > -50 && temp.y < elements->win_size.y + 50)
+                            sfRenderWindow_drawVertexArray(elements->window, chunk->cube_map[i]->east[j], list[0]->state);
+                }
             }
         }
 

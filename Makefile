@@ -30,6 +30,7 @@ SRC	=	engine/sprite.c	\
 		engine/define_vertex.c	\
 		engine/square.c	\
 		engine/text_infos.c	\
+		engine/collision.c	\
 		sources/main.c	\
 		sources/keys.c	\
 		sources/ope.c	\

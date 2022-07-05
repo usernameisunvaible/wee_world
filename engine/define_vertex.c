@@ -10,12 +10,12 @@
 #include <SFML/Graphics.h>
 #include "includes/include_engine.h"
 
-sfVertex *define_vertex(sfVector2f pos, sfColor color, sfVector2f texcord)
+sfVertex define_vertex(sfVector2f pos, sfColor color, sfVector2f texcord)
 {
-    sfVertex *vert = malloc(sizeof(sfVertex));
+    sfVertex vert;
 
-    vert->position = pos;
-    vert->color =  color;
-    vert->texCoords = texcord;
+    vert.position = pos;
+    vert.color =  color;
+    vert.texCoords = texcord;
     return vert;
 }

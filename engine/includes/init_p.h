@@ -16,7 +16,7 @@ args by args:
 char **textures_paths: this is an array who contain all the texture paths
 */
 
-void close_elements(elements_t *elements);
+void free_elements(elements_t *elements);
 /*This function close and free all the element who have been create in
 init_elements()
 args by args:

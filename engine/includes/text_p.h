@@ -13,5 +13,6 @@ sfText *text_factory(text_params_t params, elements_t *elements);
 text_params_t define_text_params(char *string, char *font_path, sfVector2f pos,
 unsigned int size);
 void refresh_text(elements_t *elements, sfText *text, char *string);
+void free_font(all_my_font_t *list);
 
 #endif //TEXT_P_H_

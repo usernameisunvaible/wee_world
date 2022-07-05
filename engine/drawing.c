@@ -37,7 +37,7 @@ sfColor color)
     }
 }
 
-void circle_draw_points(int *p_buf, framebuffer_t *fbuffer,
+static void circle_draw_points(int *p_buf, framebuffer_t *fbuffer,
 sfVector2i point, sfColor color)
 {
     if (((p_buf[0] - point.x)*(p_buf[0] - point.x) ) +
