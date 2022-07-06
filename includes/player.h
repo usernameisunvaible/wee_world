@@ -25,9 +25,11 @@ typedef struct {
     sfVector3f pos_on_map;
     sfVector2f pos_on_screen;
     unsigned char move;
+    unsigned char apply_move;
     sfVector2u timer;
     sfBool diag;
     jump_ *jump;
+    sfBool on_the_ground;
 }player_;
 
 #endif //PLAYER_H

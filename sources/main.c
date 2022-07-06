@@ -14,19 +14,18 @@ int main (int ac, char **av)
 {
     elements_t *elements = load_assets(define_vectori(1920, 1080));
 
-    map_ *map = load_map(elements, 51);
+    map_ *map = load_map(elements, 14);
     texture_ **textures = init_mapstates();
     sfText *fps = text_factory(define_text_params("0","assets/akhirtathun.ttf", define_vectorf(0, 0), 25), elements);
     char buf[4];
     player_ *player = init_player(map, define_vectori(3000, 3000), elements );
     framebuffer_t *fbr = init_framebuffer(define_vectori(elements->win_size.x, elements->win_size.y));
 
-    // sfRenderWindow_close(elements->window);
     while (sfRenderWindow_isOpen(elements->window)) {
         sfRenderWindow_clear(elements->window, sfBlack);
         key_events(elements, player);
-        move_player(player, elements);
-        load_arround(player_chunk(player, map), map);
+        move_player(player, elements, map);
+        load_arround(player_chunk(player->pos_on_map, map), map);
         jump(player, elements, map, map->chunk_list[4]);
         appli_move(player, map, elements);
         for (int i = 0; i < 9; ++i) {
