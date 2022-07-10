@@ -9,7 +9,7 @@ sfVector2i define_vectori(int x, int y)
     return vec;
 }
 
-sfVector2f define_vectorf(float x, float y)
+sfVector2f  define_vectorf(float x, float y)
 {
     sfVector2f vec;
 

@@ -17,7 +17,6 @@ int main (int ac, char **av)
     char buf[4];
     player_ *player = init_player(map, define_vectori(3000, 3000), elements );
     framebuffer_t *fbr = init_framebuffer(define_vectori(elements->win_size.x, elements->win_size.y));
-
     character_ *character = init_charactere(elements, map);
 
 
@@ -35,12 +34,12 @@ int main (int ac, char **av)
         }
         refresh_annims(character, elements, map, sfTrue);
         
-        display_brick(elements, character->r_arm);
-        display_brick(elements, character->r_leg);
-        display_brick(elements, character->l_leg);
-        display_brick(elements, character->body);
-        display_brick(elements, character->l_arm);
-        display_brick(elements, character->head);
+        display_brick(elements, character->r_arm, character);
+        display_brick(elements, character->r_leg, character);
+        display_brick(elements, character->l_leg, character);
+        display_brick(elements, character->body, character);
+        display_brick(elements, character->l_arm, character);
+        display_brick(elements, character->head, character);
         
         // put_pixel(fbr, elements->win_size.x / 2, elements->win_size.y / 2, sfMagenta);
         // draw_rect(fbr, define_rect(elements->win_size.x / 2 - map->infos->bloc_size / 2, elements->win_size.y / 2 - map->infos->bloc_size * 2, elements->win_size.x/ 2 + map->infos->bloc_size / 2, elements->win_size.y/2), sfMagenta);

@@ -46,6 +46,8 @@ typedef struct {
     annim_ *annim_r_leg;
     annim_ *annim_l_arm;
     annim_ *annim_r_arm;
+    sfRenderStates *skin;
+    int angle;
 }character_;
 
 typedef struct {

@@ -18,7 +18,7 @@ texture_ **init_mapstates(void)
 {
     int nb = 1;
     texture_ **list = malloc(sizeof(texture_ *) * nb);
-    list[0] = init_renderstates("assets/grass.png", 1, sfGreen);
+    list[0] = init_renderstates("assets/grass.png", 1, sfWhite);
 
 
     return list;

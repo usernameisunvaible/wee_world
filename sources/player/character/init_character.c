@@ -4,9 +4,12 @@
     //      /|\
     //      / \
 
-sfVector2f iso(sfVector3f p, map_ *map, sfVector2f offset)
+sfVector2f iso(sfVector3f p, map_ *map, sfVector2f offset, int angle)
 {
-    return define_vectorf(map->infos->cos_angle * p.x - map->infos->cos_angle * p.y + offset.x, (map->infos->sin_angle * p.y + map->infos->cos_angle * p.x) + p.z + offset.y);
+    p.x = (dcos(angle) * p.x) + (p.y * -dsin(angle));
+    p.y = (dsin(angle) * p.x) + (p.y * dcos(angle));
+
+    return define_vectorf(map->infos->cos_angle * p.x - map->infos->cos_angle * p.y + offset.x, (map->infos->sin_angle * p.y + map->infos->sin_angle * p.x) + p.z + offset.y);
 }
 
 brick_ *init_brick(void)
@@ -32,7 +35,6 @@ annim_ *init_annim(int dir)
     annim->p4 = define_vectorf(0, 0);
     annim->timer = 0;
     annim->timer_tot = 0;
-
     return annim;
 }
 
@@ -40,7 +42,7 @@ character_ *init_charactere(elements_t *elements, map_ *map)
 {
     sfVector3f initial_pos = define_vectortf(0, 0, 0);
     character_ *character = malloc(sizeof(character_));
-    character->size = define_vectortf( map->infos->bloc_size / 3,  map->infos->bloc_size / 3 ,  map->infos->bloc_size / 3 * 6);
+    character->size = define_vectortf( map->infos->bloc_size / 2,  map->infos->bloc_size / 3 ,  map->infos->bloc_size / 3 * 6);
     character->l_leg = init_brick();
     character->r_leg = init_brick();
     character->annim_l_leg = init_annim(1);
@@ -51,6 +53,12 @@ character_ *init_charactere(elements_t *elements, map_ *map)
     character->r_arm = init_brick();
     character->annim_r_arm = init_annim(1);
     character->head = init_brick();
+    character->skin = malloc(sizeof(sfRenderStates));
+    character->skin->texture = sfTexture_createFromFile("assets/skin.png", NULL);
+    character->skin->blendMode = sfBlendNone;
+    character->skin->shader = NULL;
+    character->skin->transform = sfTransform_fromMatrix(1,0,1,0,1,0,0,0,1);
+    character->angle = 0;
     return character;
 
 }
@@ -139,22 +147,22 @@ void refresh_annims(character_ *character, elements_t *elements, map_ *map, sfBo
     refresh_annim_top(character->annim_r_arm, character, elements, idle);
     refresh_annim_botom(character->annim_l_leg, character, elements, idle);
     refresh_annim_botom(character->annim_r_leg, character, elements, idle);
-    refresh_left_leg(character->l_leg, map, character, elements);
-    refresh_right_leg(character->r_leg, map, character, elements);
-    refresh_body(character->body, map, character, elements);
-    refresh_left_arm(character->l_arm,map, character, elements);
-    refresh_right_arm(character->r_arm,map, character, elements);
-    refresh_head(character->head, map, character, elements);
+    refresh_left_leg(character->l_leg, map, character, elements, character->angle);
+    refresh_right_leg(character->r_leg, map, character, elements, character->angle);
+    refresh_body(character->body, map, character, elements, character->angle);
+    refresh_left_arm(character->l_arm,map, character, elements, character->angle);
+    refresh_right_arm(character->r_arm,map, character, elements, character->angle);
+    refresh_head(character->head, map, character, elements, character->angle);
 }
 
-void display_brick(elements_t *elements, brick_ *brick)
+void display_brick(elements_t *elements, brick_ *brick, character_ *character)
 {
-    sfRenderWindow_drawVertexArray(elements->window, brick->right, NULL);
-    sfRenderWindow_drawVertexArray(elements->window, brick->bottom, NULL);
-    sfRenderWindow_drawVertexArray(elements->window, brick->back, NULL);
-    sfRenderWindow_drawVertexArray(elements->window, brick->front, NULL);
-    sfRenderWindow_drawVertexArray(elements->window, brick->left, NULL);
-    sfRenderWindow_drawVertexArray(elements->window, brick->top, NULL);
+    sfRenderWindow_drawVertexArray(elements->window, brick->right, character->skin);
+    sfRenderWindow_drawVertexArray(elements->window, brick->bottom, character->skin);
+    sfRenderWindow_drawVertexArray(elements->window, brick->back, character->skin);
+    sfRenderWindow_drawVertexArray(elements->window, brick->front, character->skin);
+    sfRenderWindow_drawVertexArray(elements->window, brick->left, character->skin);
+    sfRenderWindow_drawVertexArray(elements->window, brick->top, character->skin);
 }
 
 

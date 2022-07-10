@@ -2,7 +2,7 @@
 
 static sfColor select_colortop(int type)
 {
-    if (type == 1) { return sfGreen;}
+    if (type == 1) { return sfWhite;}
 }
 
 static sfColor select_colorsouth(int type)
@@ -51,10 +51,6 @@ cube_ *load_cube(sfVector2i id, char *str_map, elements_t *elements, int type, m
     cube->pos_on_screen = define_vectorf(NORD_OUEST);
     cube->top = sfVertexArray_create();
     sfVertexArray_setPrimitiveType(cube->top, sfQuads);
-    // if (real_id.x == 16 && real_id.y == 16)
-    //     color_top = sfBlue;
-    // if (player)
-    //     color_top = sfRed;
     sfVertexArray_append(cube->top, define_vertex(cube->pos_on_screen, color_top , define_vectorf(0, 0)));
     sfVertexArray_append(cube->top, define_vertex(define_vectorf(NORD_EST), color_top, define_vectorf(512, 0)));
     sfVertexArray_append(cube->top, define_vertex(define_vectorf(SUD_EST), color_top, define_vectorf(512, 512)));

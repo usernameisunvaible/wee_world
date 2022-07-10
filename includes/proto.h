@@ -31,17 +31,16 @@ void free_mapstates(texture_ **list);
 void free_player(player_ *player);
 void player_collisions(player_ *player, elements_t *elements, map_ *s_map);
 
-void refresh_left_leg(brick_ *left_leg, map_ *map, character_ *character, elements_t *elements);
+void refresh_left_leg(brick_ *left_leg, map_ *map, character_ *character, elements_t *elements, int angle);
 character_ *init_charactere(elements_t *elements, map_ *map);
-// void del_me_show_leg(elements_t *elements, sfVertexArray *leg);
-void display_brick(elements_t *elements, brick_ *brick);
-sfVector2f iso(sfVector3f p, map_ *map, sfVector2f offset);
-void refresh_right_leg(brick_ *left_leg, map_ *map, character_ *character, elements_t *elements);
-void refresh_body(brick_ *body, map_ *map, character_ *character, elements_t *elements);
+void display_brick(elements_t *elements, brick_ *brick, character_ *character);
+sfVector2f iso(sfVector3f p, map_ *map, sfVector2f offset, int angle);
+void refresh_right_leg(brick_ *left_leg, map_ *map, character_ *character, elements_t *elements, int angle);
+void refresh_body(brick_ *body, map_ *map, character_ *character, elements_t *elements, int angle);
 void refresh_annims(character_ *character, elements_t *elements, map_ *map, sfBool idle);
-void refresh_left_arm(brick_ *left_leg, map_ *map, character_ *character, elements_t *elements);
-void refresh_right_arm(brick_ *right_arm, map_ *map, character_ *character, elements_t *elements);
-void refresh_head(brick_ *head, map_ *map, character_ *character, elements_t *elements);
+void refresh_left_arm(brick_ *left_leg, map_ *map, character_ *character, elements_t *elements, int angle);
+void refresh_right_arm(brick_ *right_arm, map_ *map, character_ *character, elements_t *elements, int angle);
+void refresh_head(brick_ *head, map_ *map, character_ *character, elements_t *elements, int angle);
 
 
 

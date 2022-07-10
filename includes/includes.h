@@ -44,7 +44,7 @@
     #define KEY_CODE elements->event.key.code
     #define PI 3.1415
 
-    #define RECT_SIZE 15            //max 50    min 15
+    #define RECT_SIZE 50            //max 50    min 15
     #define NB_CHUNK_MAX 31250
 
     #define PLAYER_SPEED 1
