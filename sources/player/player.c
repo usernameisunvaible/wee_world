@@ -1,4 +1,4 @@
-#include "../includes/includes.h"
+#include "../../includes/includes.h"
 
 sfVector2f get_pos_on_map(sfVector3f pos_on_map, map_ *s_map)
 {
@@ -32,20 +32,20 @@ void move_player(player_ *player, elements_t *elements, map_ *s_map)
     while (player->timer.x >= time) {
         player_collisions(player, elements, s_map);
         if (player->apply_move & TOP) {
-            player->pos_on_map.y -= elements->win_size.x / 1920;
-            player->pos_on_map.x -= elements->win_size.x / 1920;
+            player->pos_on_map.y -= s_map->infos->bloc_size / 45;
+            player->pos_on_map.x -= s_map->infos->bloc_size / 45;
         }
         if (player->apply_move & BOTTOM) {
-            player->pos_on_map.y += elements->win_size.x / 1920;
-            player->pos_on_map.x += elements->win_size.x / 1920;
+            player->pos_on_map.y += s_map->infos->bloc_size / 45;
+            player->pos_on_map.x += s_map->infos->bloc_size / 45;
         }
         if (player->apply_move & LEFT) {
-            player->pos_on_map.y += elements->win_size.x / 1920;
-            player->pos_on_map.x -= elements->win_size.x / 1920;
+            player->pos_on_map.y += s_map->infos->bloc_size / 45;
+            player->pos_on_map.x -= s_map->infos->bloc_size / 45;
         }
         if (player->apply_move & RIGHT) {
-            player->pos_on_map.y -= elements->win_size.x / 1920;
-            player->pos_on_map.x += elements->win_size.x / 1920;
+            player->pos_on_map.y -= s_map->infos->bloc_size / 45;
+            player->pos_on_map.x += s_map->infos->bloc_size / 45;
         }
         player->timer.x -= time;
     }
@@ -69,7 +69,6 @@ void gravity(player_ *player, elements_t *elements, map_ *s_map, chunk_ *chunk)
 
 void jump(player_ *player, elements_t *elements, map_ *s_map, chunk_ *chunk)
 {
-        //chunk->mapping[(int)(get_pos_on_map(player, s_map).y) % 32 * 32 + (int)(get_pos_on_map(player, s_map).x) % 32]
 
     player->jump->timer.x += elements->chrono->ms - player->jump->timer.y;
     while (player->jump->timer.x >= 25)

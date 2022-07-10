@@ -15,6 +15,40 @@
 #define PL player->move &
 
 typedef struct {
+    sfVertexArray *top;
+    sfVertexArray *bottom;
+    sfVertexArray *front;
+    sfVertexArray *left;
+    sfVertexArray *right;
+    sfVertexArray *back;
+}brick_;
+
+typedef struct {
+    sfVector2f p1;
+    sfVector2f p2;
+    sfVector2f p3;
+    sfVector2f p4;
+    int angle;
+    int dir;
+    int timer;
+    int timer_tot;
+}annim_;
+
+typedef struct {
+    brick_ *head;
+    brick_ *body;
+    brick_ *l_arm;
+    brick_ *r_arm;
+    brick_ *l_leg;
+    brick_ *r_leg;
+    sfVector3f size;
+    annim_ *annim_l_leg;
+    annim_ *annim_r_leg;
+    annim_ *annim_l_arm;
+    annim_ *annim_r_arm;
+}character_;
+
+typedef struct {
     sfVector2i timer;
     float offset;
     int counter;
@@ -30,6 +64,7 @@ typedef struct {
     sfBool diag;
     jump_ *jump;
     sfBool on_the_ground;
+    character_ *charactere;
 }player_;
 
 #endif //PLAYER_H

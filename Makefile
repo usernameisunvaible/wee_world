@@ -33,17 +33,24 @@ SRC	=	engine/sprite.c	\
 		engine/collision.c	\
 		sources/main.c	\
 		sources/keys.c	\
-		sources/ope.c	\
-		sources/load_map.c	\
-		sources/map.c	\
-		sources/init_map_textures.c	\
-		sources/perlin_noise.c	\
-		sources/itoa.c	\
-		sources/load_chunks.c	\
-		sources/init_player.c	\
-		sources/player.c	\
-		sources/chunk.c	\
-		sources/player_collision.c	\
+		sources/utils/ope.c	\
+		sources/map/load_map.c	\
+		sources/map/map.c	\
+		sources/map/init_map_textures.c	\
+		sources/map/perlin_noise.c	\
+		sources/utils/itoa.c	\
+		sources/map/load_chunks.c	\
+		sources/player/init_player.c	\
+		sources/player/player.c	\
+		sources/map/chunk.c	\
+		sources/player/player_collision.c	\
+		sources/player/character/init_character.c	\
+		sources/player/character/left_leg.c	\
+		sources/player/character/right_leg.c	\
+		sources/player/character/body.c	\
+		sources/player/character/left_arm.c	\
+		sources/player/character/right_arm.c	\
+		sources/player/character/head.c	\
 
 
 OBJ	=	$(SRC:.c=.o)

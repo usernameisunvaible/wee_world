@@ -1,4 +1,4 @@
-#include "../includes/includes.h"
+#include "../../includes/includes.h"
 
 static jump_ *init_jump(void)
 {
@@ -10,7 +10,7 @@ static jump_ *init_jump(void)
     return jump;
 }
 
-player_ *init_player(map_ *s_map, sfVector2i player_spawn, elements_t *elements )
+player_ *init_player(map_ *s_map, sfVector2i player_spawn, elements_t *elements)
 {
     player_ *player = malloc(sizeof(player_));
     player->pos_on_map = define_vectortf(player_spawn.x * s_map->infos->bloc_size,  player_spawn.y * s_map->infos->bloc_size, 0);

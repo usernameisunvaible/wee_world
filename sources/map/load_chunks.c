@@ -1,5 +1,5 @@
 
-#include "../includes/includes.h"
+#include "../../includes/includes.h"
 
 chunk_ *load_chunk(unsigned int coords, int seed)
 {

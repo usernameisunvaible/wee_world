@@ -1,4 +1,4 @@
-#include "../includes/includes.h"
+#include "../../includes/includes.h"
 
 texture_ *init_renderstates(char *path, int type, sfColor bgcolor)
 {

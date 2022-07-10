@@ -7,9 +7,6 @@ elements_t *load_assets(sfVector2i screen)
     return init_elements(textures, fonts, screen);
 }
 
-
-
-
 int main (int ac, char **av)
 {
     elements_t *elements = load_assets(define_vectori(1920, 1080));
@@ -21,6 +18,9 @@ int main (int ac, char **av)
     player_ *player = init_player(map, define_vectori(3000, 3000), elements );
     framebuffer_t *fbr = init_framebuffer(define_vectori(elements->win_size.x, elements->win_size.y));
 
+    character_ *character = init_charactere(elements, map);
+
+
     while (sfRenderWindow_isOpen(elements->window)) {
         sfRenderWindow_clear(elements->window, sfBlack);
         key_events(elements, player);
@@ -28,11 +28,22 @@ int main (int ac, char **av)
         load_arround(player_chunk(player->pos_on_map, map), map);
         jump(player, elements, map, map->chunk_list[4]);
         appli_move(player, map, elements);
+
         for (int i = 0; i < 9; ++i) {
             generate_chunk_arrays(player->pos_on_map, map, map->chunk_list[i], elements);
-            refresh_chunk( map->chunk_list[i], elements, textures);
+            refresh_chunk( map->chunk_list[i], elements, textures, map);
         }
-        draw_rect(fbr, define_rect(elements->win_size.x / 2 - map->infos->bloc_size / 2, elements->win_size.y / 2 - map->infos->bloc_size * 2, elements->win_size.x/ 2 + map->infos->bloc_size / 2, elements->win_size.y/2), sfMagenta);
+        refresh_annims(character, elements, map, sfTrue);
+        
+        display_brick(elements, character->r_arm);
+        display_brick(elements, character->r_leg);
+        display_brick(elements, character->l_leg);
+        display_brick(elements, character->body);
+        display_brick(elements, character->l_arm);
+        display_brick(elements, character->head);
+        
+        // put_pixel(fbr, elements->win_size.x / 2, elements->win_size.y / 2, sfMagenta);
+        // draw_rect(fbr, define_rect(elements->win_size.x / 2 - map->infos->bloc_size / 2, elements->win_size.y / 2 - map->infos->bloc_size * 2, elements->win_size.x/ 2 + map->infos->bloc_size / 2, elements->win_size.y/2), sfMagenta);
         refresh_framebuffer(fbr, elements);
         refresh_text(elements, fps, my_itoa((int) elements->fps->fps, buf));
         refresh_elements(elements);
