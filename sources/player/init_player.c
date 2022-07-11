@@ -25,6 +25,7 @@ player_ *init_player(map_ *s_map, sfVector2i player_spawn, elements_t *elements)
     player->jump = init_jump();
     player->pos_on_map.z = s_map->chunk_list[4]->mapping[(int)(get_pos_on_map(player->pos_on_map, s_map).y) % 32 * 32 + (int)(get_pos_on_map(player->pos_on_map, s_map).x) % 32];
     player->on_the_ground = sfFalse;
+    player->character = init_charactere(elements, s_map);
     return player;
 }
 

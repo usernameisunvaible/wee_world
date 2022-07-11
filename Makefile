@@ -51,6 +51,7 @@ SRC	=	engine/sprite.c	\
 		sources/player/character/left_arm.c	\
 		sources/player/character/right_arm.c	\
 		sources/player/character/head.c	\
+		sources/player/character/display_character.c	\
 
 
 OBJ	=	$(SRC:.c=.o)

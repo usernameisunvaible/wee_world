@@ -32,17 +32,8 @@ int main (int ac, char **av)
             generate_chunk_arrays(player->pos_on_map, map, map->chunk_list[i], elements);
             refresh_chunk( map->chunk_list[i], elements, textures, map);
         }
-        refresh_annims(character, elements, map, sfTrue);
-        
-        display_brick(elements, character->r_arm, character);
-        display_brick(elements, character->r_leg, character);
-        display_brick(elements, character->l_leg, character);
-        display_brick(elements, character->body, character);
-        display_brick(elements, character->l_arm, character);
-        display_brick(elements, character->head, character);
-        
-        // put_pixel(fbr, elements->win_size.x / 2, elements->win_size.y / 2, sfMagenta);
-        // draw_rect(fbr, define_rect(elements->win_size.x / 2 - map->infos->bloc_size / 2, elements->win_size.y / 2 - map->infos->bloc_size * 2, elements->win_size.x/ 2 + map->infos->bloc_size / 2, elements->win_size.y/2), sfMagenta);
+
+        refresh_annims(player->character, elements, map);
         refresh_framebuffer(fbr, elements);
         refresh_text(elements, fps, my_itoa((int) elements->fps->fps, buf));
         refresh_elements(elements);

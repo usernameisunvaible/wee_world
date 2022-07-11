@@ -47,6 +47,33 @@ void move_player(player_ *player, elements_t *elements, map_ *s_map)
             player->pos_on_map.y -= s_map->infos->bloc_size / 45;
             player->pos_on_map.x += s_map->infos->bloc_size / 45;
         }
+        if (player->apply_move & TOP && player->apply_move & LEFT) {
+            player->character->angle = 90;
+            player->character->do_annim = sfTrue;
+        }
+        if (player->apply_move & TOP && player->apply_move & RIGHT) {
+            player->character->angle = 180;
+            player->character->do_annim = sfTrue;
+        }
+        if (player->apply_move & BOTTOM && player->apply_move & LEFT) {
+            player->character->angle = 0;
+            player->character->do_annim = sfTrue;
+        }
+        if (player->apply_move & BOTTOM && player->apply_move & RIGHT) {
+            player->character->angle = 270;
+            player->character->do_annim = sfTrue;
+        }
+        if (!player->apply_move | 0) {
+            player->character->do_annim = sfFalse;
+            player->character->annim_l_arm->angle = 180;
+            player->character->annim_r_arm->angle = 180;
+            player->character->annim_l_leg->angle = 180;
+            player->character->annim_r_leg->angle = 180;
+            player->character->annim_l_arm->dir = 0;
+            player->character->annim_r_leg->dir = 0;
+            player->character->annim_r_arm->dir = 1;
+            player->character->annim_l_leg->dir = 1;
+        }
         player->timer.x -= time;
     }
     player->timer.y = elements->chrono->ms;

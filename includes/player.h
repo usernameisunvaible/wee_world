@@ -12,6 +12,15 @@
 #define RIGHT           1 << 6
 #define TOP_RIGHT       1 << 7
 
+#define L_ARM character->l_arm
+#define R_ARM character->r_arm
+#define L_LEG character->l_leg
+#define R_LEG character->r_leg
+#define HEAD character->head
+#define BODY character->body
+
+
+
 #define PL player->move &
 
 typedef struct {
@@ -48,6 +57,7 @@ typedef struct {
     annim_ *annim_r_arm;
     sfRenderStates *skin;
     int angle;
+    sfBool do_annim;
 }character_;
 
 typedef struct {
@@ -66,7 +76,7 @@ typedef struct {
     sfBool diag;
     jump_ *jump;
     sfBool on_the_ground;
-    character_ *charactere;
+    character_ *character;
 }player_;
 
 #endif //PLAYER_H

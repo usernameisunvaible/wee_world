@@ -124,7 +124,7 @@ map_ *load_map(elements_t *elements, int seed)
     for (int i = 0; i < 9; ++i)
         map->chunk_list[i] = NULL;
     map->infos = malloc(sizeof(math_inf_));
-    load_maths_infos(25, elements, map->infos, seed);
+    load_maths_infos(GLOB_ANGLE, elements, map->infos, seed);
     return map;
 }
 

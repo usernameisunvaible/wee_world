@@ -6,8 +6,18 @@
 
 sfVector2f iso(sfVector3f p, map_ *map, sfVector2f offset, int angle)
 {
-    p.x = (dcos(angle) * p.x) + (p.y * -dsin(angle));
-    p.y = (dsin(angle) * p.x) + (p.y * dcos(angle));
+
+    if (angle == 90 || angle == 270) {
+        float temp = p.x;
+        p.x = p.y;
+        p.y = temp;
+        // p.x *= -1;
+        p.y *= -1;
+    }
+    if (angle == 90 || angle == 180) {
+        p.x = (dcos(180) * p.x) + (p.y * -dsin(180));
+        p.y = (dsin(180) * p.x) + (p.y * dcos(180));
+    }
 
     return define_vectorf(map->infos->cos_angle * p.x - map->infos->cos_angle * p.y + offset.x, (map->infos->sin_angle * p.y + map->infos->sin_angle * p.x) + p.z + offset.y);
 }
@@ -59,13 +69,17 @@ character_ *init_charactere(elements_t *elements, map_ *map)
     character->skin->shader = NULL;
     character->skin->transform = sfTransform_fromMatrix(1,0,1,0,1,0,0,0,1);
     character->angle = 0;
+    character->do_annim = sfFalse;
+
+    // character->size.x = (dcos(character->angle) * character->size.x) + (character->size.y * -dsin(character->angle));
+    // character->size.y = (dsin(character->angle) * character->size.x) + (character->size.y * dcos(character->angle));
     return character;
 
 }
 
 
 
-void refresh_annim_top(annim_ *annim, character_ *character, elements_t *elements, sfBool idle)
+void refresh_annim_top(annim_ *annim, character_ *character, elements_t *elements, sfBool do_annim)
 {
     int droit = 180;
     int ouverture = 50;
@@ -76,7 +90,7 @@ void refresh_annim_top(annim_ *annim, character_ *character, elements_t *element
     annim->timer_tot += elements->chrono->ms - annim->timer;
     while (annim->timer_tot >= PLAYER_ANNIM_SPEED)
     {
-        if (idle == sfFalse) {
+        if (do_annim == sfTrue) {
             if (annim->angle <= 180 + ouverture && annim->dir == 1) {
                 annim->angle += 2;
             }
@@ -103,7 +117,7 @@ void refresh_annim_top(annim_ *annim, character_ *character, elements_t *element
     annim->p4 = define_vectorf(roundf(dcos(annim->angle) * (character->size.y / 2)), roundf(dsin(annim->angle) * (character->size.y / 2)));
 }
 
-void refresh_annim_botom(annim_ *annim, character_ *character, elements_t *elements, sfBool idle)
+void refresh_annim_botom(annim_ *annim, character_ *character, elements_t *elements, sfBool do_annim)
 {
     int droit = 180;
     int ouverture = 50;
@@ -114,7 +128,7 @@ void refresh_annim_botom(annim_ *annim, character_ *character, elements_t *eleme
     annim->timer_tot += elements->chrono->ms - annim->timer;
     while (annim->timer_tot >= PLAYER_ANNIM_SPEED)
     {
-        if (idle == sfFalse) {
+        if (do_annim == sfTrue) {
             if (annim->angle <= 180 + ouverture && annim->dir == 1) {
                 annim->angle += 2;
             }
@@ -141,18 +155,25 @@ void refresh_annim_botom(annim_ *annim, character_ *character, elements_t *eleme
     annim->p4 = define_vectorf(roundf(dcos(annim->angle) * character->size.y / 2), roundf(dsin(annim->angle) * character->size.y / 2));
 }
 
-void refresh_annims(character_ *character, elements_t *elements, map_ *map, sfBool idle)
+void refresh_annims(character_ *character, elements_t *elements, map_ *map)
 {
-    refresh_annim_top(character->annim_l_arm, character, elements, idle);
-    refresh_annim_top(character->annim_r_arm, character, elements, idle);
-    refresh_annim_botom(character->annim_l_leg, character, elements, idle);
-    refresh_annim_botom(character->annim_r_leg, character, elements, idle);
+    refresh_annim_top(character->annim_l_arm, character, elements, character->do_annim);
+    refresh_annim_top(character->annim_r_arm, character, elements, character->do_annim);
+    refresh_annim_botom(character->annim_l_leg, character, elements, character->do_annim);
+    refresh_annim_botom(character->annim_r_leg, character, elements, character->do_annim);
     refresh_left_leg(character->l_leg, map, character, elements, character->angle);
     refresh_right_leg(character->r_leg, map, character, elements, character->angle);
     refresh_body(character->body, map, character, elements, character->angle);
     refresh_left_arm(character->l_arm,map, character, elements, character->angle);
     refresh_right_arm(character->r_arm,map, character, elements, character->angle);
     refresh_head(character->head, map, character, elements, character->angle);
+    display_character(elements, character);
+    // display_brick(elements, character->r_arm, character);
+    // display_brick(elements, character->r_leg, character);
+    // display_brick(elements, character->l_leg, character);
+    // display_brick(elements, character->body, character);
+    // display_brick(elements, character->l_arm, character);
+    // display_brick(elements, character->head, character);
 }
 
 void display_brick(elements_t *elements, brick_ *brick, character_ *character)
